@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Grid from "../components/Grid";
+import AlgoDetails from "../components/AlgoDetails";
 import { algorithms } from "../utils/algorithms";
 
 export default function Home() {
@@ -61,6 +62,7 @@ export default function Home() {
         setTriggerTraverse={setTriggerTraverse}
         resetSignal={resetSignal}
       />
+      <AlgoDetails algorithm={algorithm} />
     </main>
   );
 }
