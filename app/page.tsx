@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <main className="min-h-screen text-white px-4 py-6 space-y-6 bg-linear-to-r from-gray-800 via-gray-900 to-black">
       <h1 className="text-4xl font-extrabold text-center mb-2">
-        Pathfinding Visualizer
+        Algorithm Pathfinding Visualizer
       </h1>
       <p className="text-center text-lg text-gray-300 mb-4">
         Click to select <span className="text-blue-400 font-bold">Start</span>,
