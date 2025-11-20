@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { algorithms } from "../utils/algorithms";
-
 import { Play, Flag, Wand2 } from "lucide-react";
 
 const ROWS = 20;
@@ -119,55 +118,58 @@ export default function Grid({
   ]);
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full p-4">
-      <div className="mb-2 w-full flex justify-center">
+    <div className="flex flex-col items-center gap-6 w-full">
+      <div className="flex gap-4">
         <button
           onClick={addRandomObstacles}
           className="
-            flex items-center justify-center
-            bg-linear-to-r from-sky-600 to-cyan-500 text-white
-            px-4 py-2 rounded-lg shadow-md font-medium
-            hover:shadow-lg hover:from-sky-700 hover:to-cyan-600
-            transition-all duration-200 transform hover:-translate-y-px
+            flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium
+            bg-[var(--hover-bg)] hover:bg-[var(--secondary)]/20 text-[var(--foreground)]
+            border border-[var(--card-border)] transition-all duration-200
           "
         >
-          <Wand2 className="w-4 h-4 mr-2" />
-          Add Random Obstacles
+          <Wand2 className="w-3.5 h-3.5" />
+          Random Maze
         </button>
       </div>
-      <div className="overflow-auto max-w-full rounded-lg shadow-lg bg-black/20 p-2">
-        <div className="flex flex-col items-center gap-1">
+
+      {/* Canvas Container */}
+      <div className="canvas-card relative p-6 bg-[var(--card-bg)] overflow-hidden">
+        <div className="absolute top-4 left-4 text-xs font-mono text-[var(--secondary)] opacity-50">
+          GRID_VIEW_01
+        </div>
+        <div className="flex flex-col gap-[1px] bg-[var(--grid-border)] border border-[var(--grid-border)]">
           {grid.map((row, rIdx) => (
-            <div key={rIdx} className="flex gap-1">
+            <div key={rIdx} className="flex gap-[1px]">
               {row.map((cell, cIdx) => (
                 <div
                   key={`${rIdx}-${cIdx}`}
                   onClick={() => handleClick(rIdx, cIdx)}
                   className={`
-                    aspect-square w-5 sm:w-6 cursor-pointer
-                    transition-all duration-200 rounded
+                    w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 cursor-pointer
+                    transition-all duration-200
                     flex items-center justify-center
-
                     ${
                       cell === "start"
-                        ? "bg-sky-500 rounded-md shadow-lg shadow-sky-500/30"
+                        ? "bg-[#1e3a8a] z-10" // Dark Blue (Blue-900)
                         : cell === "end"
-                        ? "bg-red-500 rounded-md shadow-lg shadow-red-500/30"
+                        ? "bg-[#7f1d1d] z-10" // Dark Red (Red-900)
                         : cell === "obstacle"
-                        ? "bg-gray-900 rounded-sm scale-95 shadow-inner"
+                        ? "bg-[var(--foreground)] animate-scale-in"
                         : cell === "visited"
-                        ? "bg-slate-500/70 rounded-lg"
+                        ? "bg-[#4338ca] animate-pulse" // Indigo-700
                         : cell === "path"
-                        ? "bg-emerald-500 rounded-md shadow-inner shadow-emerald-900/30 animate-pulse"
-                        : "bg-slate-800 hover:bg-slate-700"
+                        ? "bg-[#b45309] z-10" // Amber-700
+                        : "bg-[var(--background)] hover:bg-[var(--hover-bg)]"
                     }
                   `}
                 >
-                  {cell === "start" ? (
-                    <Play className="w-4 h-4 text-white fill-white" />
-                  ) : cell === "end" ? (
-                    <Flag className="w-4 h-4 text-white fill-white" />
-                  ) : null}
+                  {cell === "start" && (
+                    <Play className="w-3 h-3 text-white fill-white" />
+                  )}
+                  {cell === "end" && (
+                    <Flag className="w-3 h-3 text-white fill-white" />
+                  )}
                 </div>
               ))}
             </div>

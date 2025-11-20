@@ -1,69 +1,100 @@
 export const algoDetails: Record<
   string,
-  { title: string; short: string; example: string }
+  {
+    name: string;
+    description: string;
+    timeComplexity: string;
+    spaceComplexity: string;
+    howItWorks: string;
+    eli5: string;
+  }
 > = {
   BFS: {
-    title: "Breadth-First Search (BFS)",
-    short:
-      "Explores nodes level by level starting from the source; reliably finds the shortest path in unweighted environments.",
-    example:
-      "Imagine you are in a playground and shout for help. First the closest friends hear you, then the next ones, then the faraway ones. BFS works the same way — it checks all the nearest places first so it finds the shortest way.",
+    name: "Breadth-First Search (BFS)",
+    description:
+      "Explores nodes level by level starting from the source. It guarantees the shortest path in an unweighted grid.",
+    timeComplexity: "O(V + E)",
+    spaceComplexity: "O(V)",
+    howItWorks:
+      "It uses a Queue data structure. It checks all neighbors of the current node before moving to the next level of neighbors.",
+    eli5: "Imagine dropping a pebble into a calm pond. The ripples spread out in a perfect circle, reaching everything close to the center first, then moving further and further out. BFS works the same way—it checks every spot 1 step away, then every spot 2 steps away, ensuring it finds the closest path first.",
   },
 
   DFS: {
-    title: "Depth-First Search (DFS)",
-    short:
-      "Traverses deeply along a single direction until it cannot continue, then backtracks; does not guarantee the shortest path.",
-    example:
-      "Think of walking in a maze and choosing one long tunnel to follow until it stops. If it ends, you walk back and try another tunnel. That is how DFS explores paths — one deep path at a time.",
+    name: "Depth-First Search (DFS)",
+    description:
+      "Explores as far as possible along each branch before backtracking. It does not guarantee the shortest path.",
+    timeComplexity: "O(V + E)",
+    spaceComplexity: "O(V)",
+    howItWorks:
+      "It uses a Stack (or recursion). It goes deep into one path until it hits a wall or the target, then backtracks.",
+    eli5: "Imagine you are exploring a maze. You pick a path and keep walking until you hit a dead end. Only then do you turn around and go back to the last intersection to try a different path. You might find the exit, but you might have walked a very long, winding route to get there.",
   },
 
   "Greedy Best-First Search": {
-    title: "Greedy Best-First Search",
-    short:
-      "Selects the next node based on a heuristic that estimates closeness to the goal; fast but not always optimal.",
-    example:
-      "Imagine searching for a toy and always running in the direction that looks closest to it. It feels fast, but sometimes you guess wrong and must turn around.",
+    name: "Greedy Best-First Search",
+    description:
+      "Selects the path that appears to be closest to the goal based on a heuristic. Fast but not guaranteed to be shortest.",
+    timeComplexity: "O(V log V)",
+    spaceComplexity: "O(V)",
+    howItWorks:
+      "It uses a Priority Queue. It always picks the node with the lowest heuristic value (estimated distance to goal).",
+    eli5: "Imagine you are hiking to a mountain peak you can see in the distance. At every fork in the trail, you simply choose the path that points most directly toward the peak. It seems like the fastest way, but you might get stuck at a canyon and have to turn back because you didn't plan ahead.",
   },
 
   "Bidirectional BFS": {
-    title: "Bidirectional Breadth-First Search",
-    short:
-      "Runs BFS simultaneously from the start and the goal, meeting in the middle to significantly reduce search time.",
-    example:
-      "Imagine two friends starting at opposite sides of a playground and running to meet each other. They meet faster than if only one friend had to run the whole distance. That’s bidirectional BFS.",
+    name: "Bidirectional BFS",
+    description:
+      "Runs two simultaneous BFS searches: one from the start and one from the end. They meet in the middle.",
+    timeComplexity: "O(b^(d/2))",
+    spaceComplexity: "O(b^(d/2))",
+    howItWorks:
+      "By searching from both ends, it significantly reduces the search space compared to standard BFS.",
+    eli5: "Imagine two friends trying to find each other in a crowded city. Instead of one friend walking the whole way, they both start walking toward each other at the same time. They will meet in the middle much faster than if only one person was doing all the walking.",
   },
 
   "A* Search": {
-    title: "A* Pathfinding Algorithm",
-    short:
-      "Combines actual travel cost with a heuristic estimate to efficiently compute the shortest path.",
-    example:
-      "It’s like having a map that tells you how far you walked and how close you still are to your toy. You choose the best path using both pieces of information so you reach the toy quickly.",
+    name: "A* Search Algorithm",
+    description:
+      "The most popular pathfinding algorithm. It uses both the actual distance from the start and the estimated distance to the goal.",
+    timeComplexity: "O(E)",
+    spaceComplexity: "O(V)",
+    howItWorks:
+      "It calculates f(n) = g(n) + h(n), where g(n) is the cost from start and h(n) is the heuristic estimate to the end.",
+    eli5: "This is like using a smart GPS. It knows how far you've driven (cost) and estimates how far is left to go (heuristic). It balances these two facts to find the absolute best route, avoiding the 'dead ends' of Greedy search and the 'aimless wandering' of standard BFS.",
   },
 
   "Dijkstra's Algorithm": {
-    title: "Dijkstra’s Shortest Path Algorithm",
-    short:
-      "Systematically selects the closest unvisited node to compute the shortest path in weighted graphs.",
-    example:
-      "Imagine tiny ants trying to reach candy. Each ant always chooses the easiest step. By taking the gentlest steps every time, they eventually find the easiest and shortest way to the candy.",
+    name: "Dijkstra's Algorithm",
+    description:
+      "The father of pathfinding algorithms. Guarantees the shortest path in weighted graphs (or unweighted).",
+    timeComplexity: "O((V+E) log V)",
+    spaceComplexity: "O(V)",
+    howItWorks:
+      "It explores nodes based on the current shortest distance from the start node, updating neighbors as it goes.",
+    eli5: "Imagine pouring water onto a landscape. The water flows naturally, filling the lowest points first before rising to higher ground. Dijkstra's algorithm flows through the 'easiest' (lowest cost) paths first, guaranteeing that when it reaches the destination, it has found the absolute path of least resistance.",
   },
 
   "Iterative Deepening DFS": {
-    title: "Iterative Deepening Depth-First Search (IDDFS)",
-    short:
-      "Runs DFS repeatedly with increasing depth limits, combining DFS’s low memory use with BFS-like completeness.",
-    example:
-      "It’s like checking for your toy first in places one step away, then places two steps away, then three, and so on. You don’t miss anything, and you remember exactly where you already looked.",
+    name: "Iterative Deepening DFS",
+    description:
+      "Combines the space efficiency of DFS with the completeness of BFS by repeatedly running DFS with increasing depth limits.",
+    timeComplexity: "O(b^d)",
+    spaceComplexity: "O(d)",
+    howItWorks:
+      "It runs DFS with depth limit 1, then 2, then 3, and so on, until the target is found.",
+    eli5: "Imagine looking for your keys. First, you check just the room you are in (Depth 1). If you don't find them, you check the room and the hallway (Depth 2). Then you check the room, hallway, and kitchen (Depth 3). You are re-checking the close spots, but it ensures you don't miss anything nearby before wandering far away.",
   },
 
   "Random Best-First Search": {
-    title: "Randomized Best-First Search",
-    short:
-      "Uses best-first search but breaks ties randomly, creating diverse exploration patterns when multiple choices look equally good.",
-    example:
-      "If two directions look just as good, this algorithm picks one randomly — like flipping a coin to decide which hallway to explore first.",
+    name: "Random Best-First Search",
+    description:
+      "A variation of Best-First Search that introduces randomness in tie-breaking, creating unique paths.",
+    timeComplexity: "O(V log V)",
+    spaceComplexity: "O(V)",
+    howItWorks:
+      "Similar to Greedy BFS, but if two nodes have the same heuristic value, it picks one randomly.",
+    eli5: "It works like the hiker looking at the mountain peak, but if two trails look equally good, they flip a coin to decide which one to take. It adds a bit of unpredictability to the journey.",
   },
 };
 
